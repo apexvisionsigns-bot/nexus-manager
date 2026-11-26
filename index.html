@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nexus Logics Manager</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#6d2fc0"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Nexus">
+<style>
+:root{--ac:#6d2fc0;--m:#c23b86;--o:#ff6a1a;--bg:#f5f3fa;--ink:#1b1535;--mut:#6b6485;--line:#e3ddf2;--card:#fff;--bad:#d6336c;--ok:#1e9e6a;--navy:#150f2b;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,"Noto Sans Sinhala","Segoe UI",system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{width:100%;font-size:16px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0 4px}
+button{border:0;border-radius:10px;min-height:40px;padding:9px 15px;background:var(--ac);color:#fff;cursor:pointer;font-weight:700}
+button.o{background:var(--o)}button.g{background:#fff;color:var(--ac);border:1.5px solid var(--ac)}button.x{background:var(--bad)}button.s{padding:5px 11px;font-size:13px;min-height:34px}
+:focus-visible{outline:3px solid var(--o);outline-offset:1px}
+a{color:var(--ac)}h2,h3{margin:0 0 8px}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 80% 10%,#3a1b8c,#150f2b 55%,#110a2c)}
+.lc{background:#fff;border-radius:20px;padding:26px;max-width:400px;width:100%;text-align:center}.lc img{width:210px;border-radius:12px}
+.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+.side{background:var(--navy);color:#fff;padding:16px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:3px}
+.side img{width:150px;border-radius:8px;margin:0 8px 10px}
+.nv{display:block;width:100%;background:transparent;color:#d9d2f2;text-align:left;padding:11px 12px;font-weight:600}.nv.on{background:var(--ac);color:#fff}
+.side small{color:#a79fc9;padding:8px 12px}
+.main{padding:18px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.chip{background:#ece4fa;color:var(--ac);border-radius:99px;padding:3px 11px;font-size:12.5px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:12px}.kp .card{margin:0}.kp strong{font-size:28px;display:block}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}.row>*{flex:1;min-width:120px}.row>button,.row>a{flex:none}
+.sp{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.mut{color:var(--mut);font-size:13px}.bad{color:var(--bad);font-weight:700}.ok{color:var(--ok);font-weight:700}
+.ln{padding:8px 0;border-bottom:1px solid var(--line)}
+.ph{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.ph img{height:84px;border-radius:8px;border:1px solid var(--line)}
+.th{width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#ece4fa}
+.bars{display:flex;gap:8px;align-items:flex-end;height:110px}.bars div{flex:1;text-align:center;font-size:12px}.bars i{display:block;background:linear-gradient(var(--m),var(--ac));border-radius:5px 5px 0 0;min-height:3px}
+.it{display:grid;grid-template-columns:1fr 60px 100px 32px;gap:4px;margin-bottom:4px}.it button{padding:0}
+.ps{display:grid;grid-template-columns:1fr 1fr 1fr 32px;gap:4px;margin-bottom:4px}.ps button{padding:0}
+.sheet{background:#fff;color:#111;padding:22px;border-radius:12px;border:1px solid var(--line);font-size:13px}
+.sheet .hd{flex-wrap:wrap;display:flex;justify-content:space-between;gap:10px;border-bottom:4px solid var(--ac);padding-bottom:8px;margin-bottom:10px}
+.sheet img{height:80px}.sheet table{width:100%;border-collapse:collapse;margin-top:8px}
+.sheet th{background:var(--ac);color:#fff;text-align:left;padding:6px}.sheet td{padding:6px;border-bottom:1px solid #ddd}.r{text-align:right}
+.sheet .tt{margin-left:auto;width:260px;margin-top:8px}.sheet .tt div{display:flex;justify-content:space-between;padding:2px 0}
+.sheet .terms{margin-top:14px;font-size:12px;border-left:4px solid var(--m);padding-left:8px;white-space:pre-line}
+.tw{overflow-x:auto}.mb{display:none}
+@media(max-width:760px){.shell{display:block}.side{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;z-index:9;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 12px #0004}
+.side img,.side small,.dk,.side span{display:none}.nv{flex:1;text-align:center;padding:10px 4px;font-size:12.5px;min-height:44px}
+.main{padding:12px 12px calc(84px + env(safe-area-inset-bottom,0px));padding-top:calc(12px + env(safe-area-inset-top,0px))}.mb{display:flex;gap:6px}
+.ps{grid-template-columns:1fr 1fr}.ps button{min-height:40px}.it{grid-template-columns:1fr 54px 84px 36px}.card{padding:12px}.sheet{padding:12px;font-size:12px}.sheet .tt{width:100%}.sheet img{height:56px}}
+@media print{body *{visibility:hidden}.sheet,.sheet *{visibility:visible}.sheet{position:absolute;left:0;top:0;width:100%;border:0}@page{margin:10mm}}
+</style></head><body>
+<div id="app"></div>
+<script>
+const LOGO='data:image/png;base64,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';
+const T={en:{app:'Nexus Manager',login:'Sign in',user:'User',pin:'PIN',bad:'Wrong PIN',out:'Sign out',dash:'Dashboard',shops:'Shops',eq:'Equipment',docs:'Quotes & bills',srv:'Server charges',set:'Settings',
+tot:'Shops saved',vm:'Visits this month',due:'Reminders due',rem:'Follow-up reminders (overdue and next 7 days)',none:'Nothing here yet.',call:'Call',done:'Done',pd:'Payments to collect (overdue and next 7 days)',sd:'Server charges due (overdue and next 7 days)',paid:'Paid',
+mv:'Shops visited this month',six:'Visits, last 6 months',add:'Add shop',name:'Shop name',about:'About the shop (business, owner, what they need)',ph:'Phone numbers (comma separated)',map:'Google location link or place name',addr:'Address',
+save:'Save',del:'Delete',back:'Back',search:'Search shops…',photos:'Photos',addph:'Add photo',nv:'Log a visit',date:'Visit date',note:'What happened?',next:'Remind me to follow up on',
+hist:'Visit history',open:'Open map',last:'Last visit',item:'Item',price:'Price (Rs.)',addeq:'Add equipment',qty:'Qty',type:'Type',quo:'Quotation',bill:'Bill',shop:'Shop',custom:'Add custom line',pick:'Add from equipment…',
+disc:'Discount (Rs.)',print:'Print / save PDF',newd:'New document',sub:'Subtotal',total:'Total',billto:'Bill to',terms:'Terms (shown on quotations)',pins:'Users',bk:'Backup',rs:'Restore',
+tip:'Data is stored on this device. Backup often, or connect Supabase below so every staff device shares the same data.',saved:'Saved',cf:'Delete this?',visits:'visits',sign:'Authorized signature',cust:'Customer signature',nodoc:'No documents yet',
+need:'Equipment this shop needs / bought',mkq:'Make quotation from these',tobill:'Convert to bill',sched:'Payment schedule (installments)',dueD:'Due date',amt:'Amount',paidOn:'Paid on',addi:'Add installment',split:'Split into',months:'monthly installments',bal:'Balance',paidT:'Paid so far',
+sv1:'Charge (e.g. hosting, domain)',every:'Repeats',once:'Once',month:'Monthly',year:'Yearly',addsv:'Add charge',markpaid:'Mark paid',adm:'Admin',staff:'Staff',newu:'Add user',role:'Role',sync:'Shared data (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync status',on:'Connected',off:'This device only',img:'Photo'},
+si:{app:'නෙක්සස් මැනේජර්',login:'ඇතුල් වන්න',user:'පරිශීලකයා',pin:'PIN අංකය',bad:'PIN එක වැරදියි',out:'ඉවත් වන්න',dash:'ඩෑෂ්බෝඩ්',shops:'සාප්පු',eq:'උපකරණ',docs:'කොටේෂන් සහ බිල්',srv:'සර්වර් ගාස්තු',set:'සැකසුම්',
+tot:'සුරැකි සාප්පු',vm:'මෙම මාසයේ visits',due:'මතක් කිරීම්',rem:'Follow-up මතක් කිරීම් (පසුවූ සහ ඉදිරි දින 7)',none:'තවම කිසිවක් නැත.',call:'අමතන්න',done:'අවසන්',pd:'අය කරගත යුතු ගෙවීම් (පසුවූ සහ ඉදිරි දින 7)',sd:'ගෙවිය යුතු සර්වර් ගාස්තු (පසුවූ සහ ඉදිරි දින 7)',paid:'ගෙවා ඇත',
+mv:'මෙම මාසයේ visit කළ සාප්පු',six:'පසුගිය මාස 6 visits',add:'සාප්පුවක් එක් කරන්න',name:'සාප්පුවේ නම',about:'සාප්පුව ගැන (ව්‍යාපාරය, හිමිකරු, අවශ්‍ය දේ)',ph:'දුරකථන අංක (කොමාවෙන් වෙන් කරන්න)',map:'Google location link එක හෝ ස්ථානයේ නම',addr:'ලිපිනය',
+save:'සුරකින්න',del:'මකන්න',back:'ආපසු',search:'සාප්පු සොයන්න…',photos:'ඡායාරූප',addph:'ඡායාරූපයක්',nv:'Visit එකක් සටහන් කරන්න',date:'Visit දිනය',note:'සිදු වූයේ කුමක්ද?',next:'ඊළඟට මතක් කරන්න (දිනය)',
+hist:'Visit ඉතිහාසය',open:'සිතියම',last:'අවසන් visit',item:'අයිතමය',price:'මිල (රු.)',addeq:'උපකරණ එක් කරන්න',qty:'ප්‍රමාණය',type:'වර්ගය',quo:'කොටේෂන්',bill:'බිල්පත',shop:'සාප්පුව',custom:'වෙනත් පේළියක්',pick:'උපකරණ වලින් එක් කරන්න…',
+disc:'වට්ටම (රු.)',print:'මුද්‍රණය / PDF',newd:'අලුත් ලේඛනයක්',sub:'උප එකතුව',total:'මුළු මුදල',billto:'ලබන්නා',terms:'කොන්දේසි (කොටේෂන් වල පෙන්වයි)',pins:'පරිශීලකයින්',bk:'Backup',rs:'Restore',
+tip:'දත්ත ගබඩා වන්නේ මෙම උපකරණයේයි. නිතර Backup කරන්න, නැතහොත් පහත Supabase සම්බන්ධ කර සියලු staff ට එකම දත්ත පෙන්වන්න.',saved:'සුරකින ලදී',cf:'මකන්නද?',visits:'visits',sign:'බලයලත් අත්සන',cust:'ගනුදෙනුකරුගේ අත්සන',nodoc:'ලේඛන නැත',
+need:'මෙම සාප්පුවට අවශ්‍ය / ගත් උපකරණ',mkq:'මේවායින් කොටේෂන් එකක් හදන්න',tobill:'බිල්පතක් බවට හරවන්න',sched:'ගෙවීම් කාලසටහන (වාරික)',dueD:'නියමිත දිනය',amt:'මුදල',paidOn:'ගෙවූ දිනය',addi:'වාරිකයක් එක් කරන්න',split:'බෙදන්න',months:'මාසික වාරික වලට',bal:'ඉතිරිය',paidT:'මෙතෙක් ගෙවූ',
+sv1:'ගාස්තුව (hosting, domain ආදි)',every:'නැවත සිදුවීම',once:'එක් වරක්',month:'මාසිකව',year:'වාර්ෂිකව',addsv:'ගාස්තුව එක් කරන්න',markpaid:'ගෙවූ බව සලකුණු කරන්න',adm:'ඇඩ්මින්',staff:'ස්ටාෆ්',newu:'පරිශීලකයෙක් එක් කරන්න',role:'භූමිකාව',sync:'හවුල් දත්ත (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync තත්වය',on:'සම්බන්ධයි',off:'මෙම උපකරණය පමණි',img:'ඡායාරූපය'}};
+const K='nx_mgr',CK='nx_cfg';
+let S=load(),CFG=lcfg(),me=null,tab='dash',cur=null,doc=null,dirty=0,okSync=0;
+function def(){return{lang:'en',ts:0,users:[{id:'u1',name:'Admin',pin:'1234',role:'admin'}],shops:[],eq:[],docs:[],srv:[],terms:'A 50% advance payment is required before work starts. Balance is payable on handover.\nThis quotation is valid for 14 days.'}}
+function load(){try{const s=JSON.parse(localStorage.getItem(K));if(s&&s.users)return Object.assign(def(),s)}catch(e){}return def()}
+function lcfg(){try{return JSON.parse(localStorage.getItem(CK))||{}}catch(e){return{}}}
+function save(){S.ts=Date.now();try{localStorage.setItem(K,JSON.stringify(S))}catch(e){alert('Storage full / ගබඩාව පිරී ඇත. Backup & delete old photos.')}dirty=1;clearTimeout(save.t);save.t=setTimeout(push,1500)}
+const hd=()=>({apikey:CFG.key,Authorization:'Bearer '+CFG.key,'Content-Type':'application/json'});
+async function push(){if(!CFG.url||!CFG.key)return;try{const r=await fetch(CFG.url.replace(/\/$/,'')+'/rest/v1/nexus_state',{method:'POST',headers:{...hd(),Prefer:'resolution=merge-duplicates'},body:JSON.stringify({id:1,data:S})});okSync=r.ok;if(r.ok)dirty=0}catch(e){okSync=0}}
+async function pull(){if(!CFG.url||!CFG.key||dirty)return;try{const r=await fetch(CFG.url.replace(/\/$/,'')+'/rest/v1/nexus_state?id=eq.1&select=data',{headers:hd()});okSync=r.ok;if(!r.ok)return;const j=await r.json();if(j[0]&&j[0].data.ts>S.ts){S=Object.assign(def(),j[0].data);localStorage.setItem(K,JSON.stringify(S));if(!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){if(me)me=S.users.find(u=>u.id==me.id)||null;draw()}}else if(!j[0])push()}catch(e){okSync=0}}
+const t=k=>(T[S.lang]||T.en)[k]||T.en[k]||k;
+const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ld=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const $=id=>document.getElementById(id),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+const rs=n=>'Rs. '+(+n||0).toLocaleString('en-LK',{minimumFractionDigits:2,maximumFractionDigits:2});
+const mapUrl=m=>/^https:\/\//i.test(m)?m:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(m);
+const tel=p=>String(p).replace(/[^\d+]/g,''),isA=()=>me&&me.role=='admin';
+const addM=(s,n)=>{const[y,m,d]=s.split('-').map(Number);return ld(new Date(y,m-1+n,d))};
+const plus=n=>ld(new Date(Date.now()+n*864e5));
+function lang(){S.lang=S.lang=='en'?'si':'en';save();draw()}
+function login(){const u=S.users.find(x=>x.id==$('lu').value);if(u&&$('pin').value===u.pin){me=u;tab='dash';draw()}else $('err').textContent=t('bad')}
+function draw(){
+ if(!me){$('app').innerHTML=`<div class="login"><div class="lc"><img src="${LOGO}" alt="Nexus Logics"><h2>${t('app')}</h2>
+ <label for="lu">${t('user')}</label><select id="lu">${S.users.map(u=>`<option value="${u.id}">${E(u.name)} (${t(u.role)})</option>`).join('')}</select>
+ <label for="pin">${t('pin')}</label><input id="pin" type="password" inputmode="numeric" autocomplete="off" style="text-align:center;font-size:20px" onkeydown="if(event.key=='Enter')login()">
+ <p id="err" class="bad" role="alert"></p><button class="o" style="width:100%" onclick="login()">${t('login')}</button><p><button class="g s" onclick="lang()">English / සිංහල</button></p></div></div>`;return}
+ const a=isA(),tabs=[['dash',t('dash')],['shops',t('shops')]].concat(a?[['eq',t('eq')],['docs',t('docs')],['srv',t('srv')],['set',t('set')]]:[]);
+ $('app').innerHTML=`<div class="shell"><aside class="side"><img src="${LOGO}" alt="Nexus Logics">${tabs.map(([k,v])=>`<button class="nv ${tab==k?'on':''}" onclick="tab='${k}';cur=null;doc=null;draw()">${v}</button>`).join('')}<span style="flex:1"></span>
+ <button class="nv dk" onclick="lang()">EN / සිංහල</button><button class="nv dk" onclick="me=null;draw()">${t('out')}</button><small>${E(me.name)}</small></aside>
+ <main class="main"><div class="top"><h2>${tabs.find(x=>x[0]==tab)[1]}</h2><span class="chip">${E(me.name)} · ${t(me.role)}</span><span class="mb"><button class="g s" onclick="lang()">EN/සිං</button><button class="g s" onclick="me=null;draw()">${t('out')}</button></span></div><div id="v"></div></main></div>`;
+ ({dash,shops,eq,docs,srv,set})[tab]();
+}
+const dueP=d=>(d.pays||[]).filter(p=>!p.paid&&p.due&&p.due<=plus(7)).map(p=>({...p,d}));
+function dash(){
+ const td=ld(),ym=td.slice(0,7),vs=[];S.shops.forEach(s=>s.visits.forEach(v=>vs.push({...v,s})));
+ const mv=vs.filter(v=>v.d.slice(0,7)==ym),rem=vs.filter(v=>v.next&&!v.done&&v.next<=plus(7)).sort((a,b)=>a.next.localeCompare(b.next));
+ const six=[];for(let i=5;i>=0;i--){const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-i);const k=ld(d).slice(0,7);six.push([d.toLocaleString(S.lang=='si'?'si-LK':'en',{month:'short'}),vs.filter(v=>v.d.slice(0,7)==k).length])}
+ const mx=Math.max(1,...six.map(x=>x[1])),ms=[...new Set(mv.map(v=>v.s.id))].map(id=>S.shops.find(s=>s.id==id));
+ const pd=isA()?S.docs.flatMap(dueP).sort((a,b)=>a.due.localeCompare(b.due)):[],sd=isA()?S.srv.filter(x=>x.due<=plus(7)).sort((a,b)=>a.due.localeCompare(b.due)):[];
+ const shn=id=>E((S.shops.find(s=>s.id==id)||{}).name||'');
+ const dc=d=>`<span class="${d<td?'bad':''}">${d}</span>`;
+ $('v').innerHTML=`<div class="kp"><div class="card"><strong>${S.shops.length}</strong>${t('tot')}</div><div class="card"><strong>${mv.length}</strong>${t('vm')}</div><div class="card"><strong class="${rem.length+pd.length+sd.length?'bad':''}">${rem.length+pd.length+sd.length}</strong>${t('due')}</div></div>
+ ${isA()?`<div class="card"><h3>${t('pd')}</h3>${pd.map(p=>`<div class="ln sp"><div><b>${shn(p.d.shop)}</b> · ${t('bill')} #${p.d.no}<div>${dc(p.due)} · ${rs(p.amt)}</div></div><button class="s o" onclick="payI('${p.d.id}','${p.id}')">${t('markpaid')}</button></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>
+ <div class="card"><h3>${t('sd')}</h3>${sd.map(x=>`<div class="ln sp"><div><b>${shn(x.shop)}</b> · ${E(x.name)}<div>${dc(x.due)} · ${rs(x.amt)}</div></div><button class="s o" onclick="payS('${x.id}')">${t('markpaid')}</button></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`:''}
+ <div class="card"><h3>${t('rem')}</h3>${rem.map(v=>`<div class="ln sp"><div><b>${E(v.s.name)}</b> ${dc(v.next)}<div class="mut">${E(v.n)}</div></div><div class="row">${v.s.phones[0]?`<a href="tel:${tel(v.s.phones[0])}"><button class="s o">${t('call')}</button></a>`:''}<button class="s" onclick="fin('${v.s.id}','${v.id}')">${t('done')}</button></div></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>
+ <div class="card"><h3>${t('six')}</h3><div class="bars">${six.map(([m,n])=>`<div><i style="height:${n/mx*80}px"></i>${n}<br>${m}</div>`).join('')}</div></div>
+ <div class="card"><h3>${t('mv')}</h3>${ms.map(s=>`<div>${E(s.name)}</div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`}
+function fin(sid,vid){S.shops.find(s=>s.id==sid).visits.find(v=>v.id==vid).done=1;save();draw()}
+function payI(did,pid){S.docs.find(d=>d.id==did).pays.find(p=>p.id==pid).paid=ld();save();draw()}
+function payS(id){const x=S.srv.find(s=>s.id==id);if(x.every=='once')S.srv=S.srv.filter(s=>s.id!=id);else x.due=addM(x.due,x.every=='month'?1:12);save();draw()}
+function shops(){
+ if(cur!==null)return detail();
+ $('v').innerHTML=`<div class="row"><input id="q" placeholder="${t('search')}" oninput="lst()"><button class="o" onclick="cur='new';draw()">+ ${t('add')}</button></div><div id="l" style="margin-top:12px"></div>`;lst()}
+function lst(){const q=($('q')?.value||'').toLowerCase();
+ $('l').innerHTML=S.shops.filter(s=>(s.name+s.phones.join()).toLowerCase().includes(q)).map(s=>{const l=s.visits.map(v=>v.d).sort().pop();
+ return`<div class="card sp"><div><b>${E(s.name)}</b><div class="mut">${s.phones.map(E).join(' · ')}</div><div class="mut">${t('last')}: ${l||'-'} · ${s.visits.length} ${t('visits')}</div></div><button onclick="cur='${s.id}';draw()">${t('shop')}</button></div>`}).join('')||`<p class="mut">${t('none')}</p>`}
+function detail(){
+ const n=cur=='new',s=n?{id:uid(),name:'',about:'',phones:[],map:'',addr:'',photos:[],visits:[],items:[]}:S.shops.find(x=>x.id==cur),a=isA();s.items=s.items||[];
+ $('v').innerHTML=`<button class="g" onclick="cur=null;draw()">← ${t('back')}</button>
+ <div class="card" style="margin-top:12px"><label>${t('name')}</label><input id="f1" value="${E(s.name)}"><label>${t('about')}</label><textarea id="f5" rows="3">${E(s.about||'')}</textarea><label>${t('ph')}</label><input id="f2" inputmode="tel" value="${E(s.phones.join(', '))}">
+ <label>${t('map')}</label><input id="f3" value="${E(s.map)}"><label>${t('addr')}</label><textarea id="f4" rows="2">${E(s.addr)}</textarea>
+ <div class="row" style="margin-top:10px"><button onclick="sv(${n})">${t('save')}</button>${s.map?`<a href="${E(mapUrl(s.map))}" target="_blank" rel="noopener"><button class="g">${t('open')}</button></a>`:''}${!n&&a?`<button class="x" onclick="rm('${s.id}')">${t('del')}</button>`:''}</div></div>
+ ${n?'':`<div class="card"><h3>${t('need')}</h3>${s.items.map((i,k)=>{const e=S.eq.find(x=>x.id==i.eid);return e?`<div class="ln sp"><div class="row" style="flex-wrap:nowrap;align-items:center">${e.img?`<img class="th" src="${e.img}" alt="">`:'<div class="th"></div>'}<div><b>${E(e.n)}</b><div class="mut">× ${i.q}${a?' · '+rs(e.p):''}</div></div></div><button class="s x" onclick="ri('${s.id}',${k})">×</button></div>`:''}).join('')}
+ <div class="row" style="margin-top:8px"><select id="ie"><option value="">${t('pick')}</option>${S.eq.map(e=>`<option value="${e.id}">${E(e.n)}</option>`).join('')}</select><input id="iq" type="number" min="1" value="1" style="max-width:80px" aria-label="${t('qty')}"><button onclick="ai('${s.id}')">+</button></div>
+ ${a&&s.items.length?`<p><button class="o" onclick="mq('${s.id}')">${t('mkq')}</button></p>`:''}</div>
+ <div class="card"><h3>${t('photos')}</h3><div class="ph">${s.photos.map((p,i)=>`<img src="${p}" alt="" onclick="rp('${s.id}',${i})">`).join('')}</div><input type="file" accept="image/*" onchange="ap(event,'${s.id}')" aria-label="${t('addph')}"></div>
+ <div class="card"><h3>${t('nv')}</h3><label>${t('date')}</label><input id="vd" type="date" value="${ld()}"><label>${t('note')}</label><textarea id="vn" rows="2"></textarea><label>${t('next')}</label><input id="vx" type="date">
+ <p><button class="o" onclick="av('${s.id}')">${t('save')}</button></p></div>
+ <div class="card"><h3>${t('hist')}</h3>${[...s.visits].reverse().map(v=>`<div class="ln"><b>${v.d}</b> ${E(v.n)}${v.next?`<div class="mut">→ ${v.next} ${v.done?'<span class="ok">✓</span>':''}</div>`:''}</div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`}`}
+function sv(n){const name=$('f1').value.trim();if(!name)return $('f1').focus();let s=n?{id:uid(),photos:[],visits:[],items:[]}:S.shops.find(x=>x.id==cur);
+ Object.assign(s,{name,about:$('f5').value,phones:$('f2').value.split(',').map(x=>x.trim()).filter(Boolean),map:$('f3').value.trim(),addr:$('f4').value});if(n)S.shops.push(s);save();cur=s.id;draw()}
+function rm(id){if(confirm(t('cf'))){S.shops=S.shops.filter(s=>s.id!=id);save();cur=null;draw()}}
+function av(id){const n=$('vn').value.trim();if(!n&&!$('vx').value)return;S.shops.find(s=>s.id==id).visits.push({id:uid(),d:$('vd').value||ld(),n,next:$('vx').value,done:0});save();draw()}
+function ai(id){const e=$('ie').value;if(!e)return;S.shops.find(s=>s.id==id).items.push({eid:e,q:Math.max(1,+$('iq').value||1)});save();draw()}
+function ri(id,k){S.shops.find(s=>s.id==id).items.splice(k,1);save();draw()}
+function mq(id){const s=S.shops.find(x=>x.id==id);doc=newDoc('quo',id,s.items.map(i=>{const e=S.eq.find(x=>x.id==i.eid);return{d:e.n,q:i.q,p:e.p}}));tab='docs';draw()}
+function rp(id,i){if(confirm(t('cf'))){S.shops.find(s=>s.id==id).photos.splice(i,1);save();draw()}}
+function img(file,max,q,cb){const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),r=Math.min(1,max/Math.max(im.width,im.height));c.width=im.width*r;c.height=im.height*r;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',q))};im.src=URL.createObjectURL(file)}
+function ap(e,id){const f=e.target.files[0];if(f)img(f,640,.6,d=>{S.shops.find(s=>s.id==id).photos.push(d);save();draw()})}
+function eq(){$('v').innerHTML=`<div class="card"><div class="row"><div><label>${t('item')}</label><input id="en"></div><div><label>${t('price')}</label><input id="ep" type="number" min="0"></div><div><label>${t('img')}</label><input id="ei" type="file" accept="image/*"></div><button class="o" onclick="ae()">${t('addeq')}</button></div></div>
+ <div class="card">${S.eq.map(e=>`<div class="ln row" style="flex-wrap:nowrap;align-items:center">${e.img?`<img class="th" src="${e.img}" alt="">`:'<div class="th"></div>'}<input value="${E(e.n)}" onchange="S.eq.find(x=>x.id=='${e.id}').n=this.value;save()"><input type="number" style="max-width:130px" value="${e.p}" onchange="S.eq.find(x=>x.id=='${e.id}').p=+this.value;save()"><button class="x s" onclick="S.eq=S.eq.filter(x=>x.id!='${e.id}');save();draw()">×</button></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`}
+function ae(){const n=$('en').value.trim();if(!n)return;const o={id:uid(),n,p:+$('ep').value||0,img:''},f=$('ei').files[0],fin=()=>{S.eq.push(o);save();draw()};f?img(f,300,.6,d=>{o.img=d;fin()}):fin()}
+const tot=d=>{const s=d.items.reduce((a,i)=>a+i.q*i.p,0),t=Math.max(0,s-(+d.disc||0)),p=(d.pays||[]).filter(x=>x.paid).reduce((a,x)=>a+(+x.amt||0),0);return{s,t,p,b:t-p}};
+function newDoc(type,shop,items){return{id:uid(),type,no:String(S.docs.filter(d=>d.type==type).length+1).padStart(4,'0'),date:ld(),shop,items:items&&items.length?items:[{d:'',q:1,p:0}],disc:0,pays:[],fresh:1}}
+function docs(){
+ if(doc)return editor();
+ $('v').innerHTML=`<button class="o" onclick="doc=newDoc('quo',S.shops[0]?.id||'');draw()">+ ${t('newd')}</button><div style="margin-top:12px">${[...S.docs].reverse().map(d=>{const c=tot(d);return`<div class="card sp"><div><b>${t(d.type)} #${d.no}</b> · ${d.date}<div class="mut">${E((S.shops.find(s=>s.id==d.shop)||{}).name||'')} · ${rs(c.t)}${d.type=='bill'?` · ${c.b<=0?`<span class="ok">${t('paid')}</span>`:`<span class="bad">${t('bal')} ${rs(c.b)}</span>`}`:''}</div></div><div class="row"><button class="s" onclick="doc=S.docs.find(x=>x.id=='${d.id}');draw()">${t('shop')}</button><button class="s x" onclick="dd('${d.id}')">×</button></div></div>`}).join('')||`<p class="mut">${t('nodoc')}</p>`}</div>`}
+function dd(id){if(confirm(t('cf'))){S.docs=S.docs.filter(d=>d.id!=id);save();draw()}}
+function editor(){
+ $('v').innerHTML=`<button class="g" onclick="doc=null;draw()">← ${t('back')}</button><div class="card" style="margin-top:12px"><div class="row"><div><label>${t('type')}</label><select onchange="doc.type=this.value;editor()"><option value="quo" ${doc.type=='quo'?'selected':''}>${t('quo')}</option><option value="bill" ${doc.type=='bill'?'selected':''}>${t('bill')}</option></select></div>
+ <div><label>${t('shop')}</label><select onchange="doc.shop=this.value;pv()">${S.shops.map(s=>`<option value="${s.id}" ${s.id==doc.shop?'selected':''}>${E(s.name)}</option>`).join('')}</select></div><div><label>${t('date')}</label><input type="date" value="${doc.date}" onchange="doc.date=this.value;pv()"></div></div>
+ <div id="its" style="margin-top:10px"></div><div class="row"><select id="pk" onchange="pk()"><option value="">${t('pick')}</option>${S.eq.map(e=>`<option value="${e.id}">${E(e.n)} — ${e.p}</option>`).join('')}</select><button class="g" onclick="doc.items.push({d:'',q:1,p:0});its();pv()">+ ${t('custom')}</button></div>
+ <label>${t('disc')}</label><input type="number" min="0" value="${doc.disc}" oninput="doc.disc=+this.value;pv()">
+ ${doc.type=='bill'?`<label>${t('sched')}</label><div id="pys"></div><div class="row"><button class="g s" onclick="doc.pays.push({id:uid(),due:ld(),amt:0,paid:''});pys();pv()">+ ${t('addi')}</button><input id="sn" type="number" min="1" value="3" style="max-width:70px" aria-label="${t('split')}"><button class="g s" onclick="spl()">${t('split')} ${t('months')}</button></div>`:''}
+ <p class="row"><button onclick="fs()">${t('save')}</button>${doc.type=='quo'&&!doc.fresh?`<button class="g" onclick="doc.type='bill';fs();editor()">${t('tobill')}</button>`:''}<button class="o" onclick="fs();window.print()">${t('print')}</button></p></div><div id="sh" class="sheet"></div>`;its();if(doc.type=='bill')pys();pv()}
+function its(){$('its').innerHTML=doc.items.map((i,k)=>`<div class="it"><input placeholder="${t('item')}" value="${E(i.d)}" oninput="doc.items[${k}].d=this.value;pv()"><input type="number" min="0" value="${i.q}" aria-label="${t('qty')}" oninput="doc.items[${k}].q=+this.value;pv()"><input type="number" min="0" value="${i.p}" aria-label="${t('price')}" oninput="doc.items[${k}].p=+this.value;pv()"><button class="x" onclick="doc.items.splice(${k},1);its();pv()">×</button></div>`).join('')}
+function pys(){$('pys').innerHTML=doc.pays.map((p,k)=>`<div class="ps"><input type="date" value="${p.due}" aria-label="${t('dueD')}" onchange="doc.pays[${k}].due=this.value;pv()"><input type="number" min="0" value="${p.amt}" aria-label="${t('amt')}" oninput="doc.pays[${k}].amt=+this.value;pv()"><input type="date" value="${p.paid}" aria-label="${t('paidOn')}" title="${t('paidOn')}" onchange="doc.pays[${k}].paid=this.value;pv()"><button class="x" onclick="doc.pays.splice(${k},1);pys();pv()">×</button></div>`).join('')}
+function spl(){const n=Math.max(1,+$('sn').value||1),a=Math.round(tot(doc).t/n*100)/100;doc.pays=Array.from({length:n},(_,i)=>({id:uid(),due:addM(ld(),i),amt:a,paid:''}));pys();pv()}
+function pk(){const e=S.eq.find(x=>x.id==$('pk').value);if(e){doc.items=doc.items.filter(i=>i.d||i.p);doc.items.push({d:e.n,q:1,p:e.p});its();pv()}$('pk').value=''}
+function pv(){const s=S.shops.find(x=>x.id==doc.shop)||{name:'',phones:[]},c=tot(doc),b=doc.type=='bill';
+ $('sh').innerHTML=`<div class="hd"><div><img src="${LOGO}" alt="Nexus Logics"><div>138/A, Sirikalum, Danture<br>+94 76 099 6789 · nexuslogics.com</div></div><div class="r"><h2 style="margin:0;color:#6d2fc0">${b?'INVOICE':'QUOTATION'}</h2>No: ${doc.no}<br>${doc.date}</div></div>
+ <b>${t('billto')}</b><br>${E(s.name)}<br>${E(s.phones[0]||'')}<div class="tw"><table><tr><th>#</th><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('price')}</th><th class="r">Total</th></tr>${doc.items.map((i,k)=>`<tr><td>${k+1}</td><td>${E(i.d)}</td><td class="r">${i.q}</td><td class="r">${rs(i.p)}</td><td class="r">${rs(i.q*i.p)}</td></tr>`).join('')}</table></div>
+ <div class="tt"><div><span>${t('sub')}</span><span>${rs(c.s)}</span></div>${doc.disc?`<div><span>${t('disc')}</span><span>-${rs(doc.disc)}</span></div>`:''}<div><b>${t('total')}</b><b>${rs(c.t)}</b></div>${b?`<div><span>${t('paidT')}</span><span>${rs(c.p)}</span></div><div><b>${t('bal')}</b><b>${rs(c.b)}</b></div>`:''}</div>
+ ${b&&doc.pays.length?`<div class="tw"><table><tr><th>${t('dueD')}</th><th class="r">${t('amt')}</th><th>${t('paidOn')}</th></tr>${doc.pays.map(p=>`<tr><td>${p.due}</td><td class="r">${rs(p.amt)}</td><td>${p.paid||'-'}</td></tr>`).join('')}</table></div>`:''}
+ ${b?'':`<div class="terms">${E(S.terms)}</div>`}<div class="sp" style="margin-top:40px"><span>${t('sign')}</span><span>${t('cust')}</span></div>`}
+function fs(){if(doc.fresh){delete doc.fresh;S.docs.push(doc)}save()}
+function srv(){$('v').innerHTML=`<div class="card"><div class="row"><div><label>${t('shop')}</label><select id="sh1">${S.shops.map(s=>`<option value="${s.id}">${E(s.name)}</option>`).join('')}</select></div><div><label>${t('sv1')}</label><input id="sn1"></div><div><label>${t('amt')}</label><input id="sa" type="number" min="0"></div>
+ <div><label>${t('dueD')}</label><input id="sd1" type="date" value="${ld()}"></div><div><label>${t('every')}</label><select id="se"><option value="month">${t('month')}</option><option value="year">${t('year')}</option><option value="once">${t('once')}</option></select></div><button class="o" onclick="as()">${t('addsv')}</button></div></div>
+ <div class="card">${S.srv.map(x=>`<div class="ln sp"><div><b>${E((S.shops.find(s=>s.id==x.shop)||{}).name||'')}</b> · ${E(x.name)}<div class="${x.due<ld()?'bad':'mut'}">${x.due} · ${rs(x.amt)} · ${t(x.every)}</div></div><div class="row"><button class="s o" onclick="payS('${x.id}')">${t('markpaid')}</button><button class="s x" onclick="S.srv=S.srv.filter(s=>s.id!='${x.id}');save();draw()">×</button></div></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`}
+function as(){if(!$('sh1').value||!$('sn1').value.trim())return;S.srv.push({id:uid(),shop:$('sh1').value,name:$('sn1').value.trim(),amt:+$('sa').value||0,due:$('sd1').value,every:$('se').value});save();draw()}
+function set(){$('v').innerHTML=`<div class="card"><h3>${t('pins')}</h3>${S.users.map(u=>`<div class="ln row" style="align-items:center"><input value="${E(u.name)}" onchange="uu('${u.id}','name',this.value)"><input value="${E(u.pin)}" style="max-width:110px" onchange="uu('${u.id}','pin',this.value)"><select style="max-width:120px" onchange="uu('${u.id}','role',this.value)"><option value="staff" ${u.role=='staff'?'selected':''}>${t('staff')}</option><option value="admin" ${u.role=='admin'?'selected':''}>${t('adm')}</option></select><button class="s x" onclick="du('${u.id}')">×</button></div>`).join('')}
+ <div class="row" style="margin-top:8px"><input id="un" placeholder="${t('user')}"><input id="up" placeholder="${t('pin')}" style="max-width:110px"><button class="o" onclick="au()">${t('newu')}</button></div></div>
+ <div class="card"><label>${t('terms')}</label><textarea id="tm" rows="4">${E(S.terms)}</textarea><p><button onclick="S.terms=$('tm').value;save();alert(t('saved'))">${t('save')}</button></p></div>
+ <div class="card"><h3>${t('sync')}</h3><p class="mut">${t('tip')}</p><label>${t('url')}</label><input id="cu" value="${E(CFG.url||'')}" placeholder="https://xxxx.supabase.co"><label>${t('key')}</label><input id="ck" value="${E(CFG.key||'')}">
+ <p>${t('sstat')}: <b>${CFG.url&&okSync?t('on'):t('off')}</b></p><div class="row"><button onclick="CFG={url:$('cu').value.trim(),key:$('ck').value.trim()};localStorage.setItem(CK,JSON.stringify(CFG));push().then(()=>draw())">${t('save')}</button><button onclick="bk()">${t('bk')}</button><button class="g" onclick="$('rf').click()">${t('rs')}</button><input id="rf" type="file" accept=".json" hidden onchange="rst(event)"></div></div>`}
+function uu(id,k,v){const u=S.users.find(x=>x.id==id);if(k!='name'&&!v)return;if(k=='role'&&v!='admin'&&S.users.filter(x=>x.role=='admin'&&x.id!=id).length==0){alert('Keep one admin');return draw()}u[k]=v;save();if(me&&me.id==id)me=u}
+function du(id){const u=S.users.find(x=>x.id==id);if(u.role=='admin'&&S.users.filter(x=>x.role=='admin').length<2||id==me.id)return alert('Keep one admin / own user');if(confirm(t('cf'))){S.users=S.users.filter(x=>x.id!=id);save();draw()}}
+function au(){const n=$('un').value.trim(),p=$('up').value.trim();if(!n||!p)return;S.users.push({id:uid(),name:n,pin:p,role:'staff'});save();draw()}
+function bk(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='nexus-backup-'+ld()+'.json';a.click()}
+function rst(e){const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(!d.shops)throw 0;S=Object.assign(def(),d);save();me=null;draw()}catch(_){alert('Invalid file')}})}
+draw();pull();setInterval(pull,45000);
+if("serviceWorker" in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script></body></html>

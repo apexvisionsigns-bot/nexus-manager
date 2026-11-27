@@ -1,8 +1,15 @@
 const crypto = require('crypto');
 const { createClient } = require('@supabase/supabase-js');
 
-const SB_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SB_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// Keep only the origin of the URL, so extra parts like /rest/v1 or a trailing slash don't break requests
+const SB_URL = (() => {
+  try {
+    return new URL((process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim()).origin;
+  } catch (e) {
+    return '';
+  }
+})();
+const SB_KEY = (process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim();
 const SECRET = process.env.AUTH_SECRET || '';
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -147,6 +154,7 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
     if (req.method !== 'POST') throw new HttpError(405, 'POST only');
+    if (/(^|\.)supabase\.com$/.test(new URL(SB_URL || 'http://x').hostname)) throw new HttpError(500, 'SUPABASE_URL is wrong: it must look like https://<project-id>.supabase.co (not the dashboard link)');
     if (!SB_URL || !SB_KEY) throw new HttpError(500, 'Supabase is not configured (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing)');
     if (SECRET.length < 16) throw new HttpError(500, 'AUTH_SECRET is missing or too short');
 

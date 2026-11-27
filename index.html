@@ -43,7 +43,7 @@ a{color:var(--ac)}h2,h3{margin:0 0 8px}
 .sheet .terms{margin-top:14px;font-size:12px;border-left:4px solid var(--m);padding-left:8px;white-space:pre-line}
 .tw{overflow-x:auto}.mb{display:none}
 @media(max-width:760px){.shell{display:block}.side{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;z-index:9;flex-direction:row;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -2px 12px #0004}
-.side img,.side small,.dk,.side span{display:none}.nv{flex:1;text-align:center;padding:10px 4px;font-size:12.5px;min-height:44px}
+.side img,.side small,.dk,.side span{display:none}.nv{flex:1;text-align:center;padding:10px 2px;font-size:11px;min-height:44px}
 .main{padding:12px 12px calc(84px + env(safe-area-inset-bottom,0px));padding-top:calc(12px + env(safe-area-inset-top,0px))}.mb{display:flex;gap:6px}
 .ps{grid-template-columns:1fr 1fr}.ps button{min-height:40px}.it{grid-template-columns:1fr 54px 84px 36px}.card{padding:12px}.sheet{padding:12px;font-size:12px}.sheet .tt{width:100%}.sheet img{height:56px}}
 @media print{body *{visibility:hidden}.sheet,.sheet *{visibility:visible}.sheet{position:absolute;left:0;top:0;width:100%;border:0}@page{margin:10mm}}
@@ -59,7 +59,7 @@ hist:'Visit history',open:'Open map',last:'Last visit',item:'Item',price:'Price 
 disc:'Discount (Rs.)',print:'Print / save PDF',newd:'New document',sub:'Subtotal',total:'Total',billto:'Bill to',terms:'Terms (shown on quotations)',pins:'Users',bk:'Backup',rs:'Restore',
 tip:'Data is stored on this device. Backup often, or connect Supabase below so every staff device shares the same data.',saved:'Saved',cf:'Delete this?',visits:'visits',sign:'Authorized signature',cust:'Customer signature',nodoc:'No documents yet',
 need:'Equipment this shop needs / bought',mkq:'Make quotation from these',tobill:'Convert to bill',sched:'Payment schedule (installments)',dueD:'Due date',amt:'Amount',paidOn:'Paid on',addi:'Add installment',split:'Split into',months:'monthly installments',bal:'Balance',paidT:'Paid so far',
-sv1:'Charge (e.g. hosting, domain)',every:'Repeats',once:'Once',month:'Monthly',year:'Yearly',addsv:'Add charge',markpaid:'Mark paid',adm:'Admin',staff:'Staff',newu:'Add user',role:'Role',sync:'Shared data (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync status',on:'Connected',off:'This device only',img:'Photo'},
+sv1:'Charge (e.g. hosting, domain)',every:'Repeats',once:'Once',month:'Monthly',year:'Yearly',addsv:'Add charge',markpaid:'Mark paid',adm:'Admin',staff:'Staff',newu:'Add user',role:'Role',sync:'Shared data (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync status',on:'Connected',off:'This device only',img:'Photo',email:'Email',pw:'Password',chpw:'Change my password',npw:'New password (6+ characters)',nauth:'This account is not set up as staff. Ask the admin.',stf:'Staff accounts',addst:'Add staff',sstat:'Sync',sy:'Synced',se2:'Sync problem, will retry',pwok:'Password changed',cfm:'Account created, but Supabase wants email confirmation. Turn off Confirm email in Supabase (Authentication > Providers > Email).',expd:'Session expired. Sign in again.',cfgT:'Connect Supabase',conn:'Connect',wait:'Signing in…',demo:'▶ Live demo'},
 si:{app:'නෙක්සස් මැනේජර්',login:'ඇතුල් වන්න',user:'පරිශීලකයා',pin:'PIN අංකය',bad:'PIN එක වැරදියි',out:'ඉවත් වන්න',dash:'ඩෑෂ්බෝඩ්',shops:'සාප්පු',eq:'උපකරණ',docs:'කොටේෂන් සහ බිල්',srv:'සර්වර් ගාස්තු',set:'සැකසුම්',
 tot:'සුරැකි සාප්පු',vm:'මෙම මාසයේ visits',due:'මතක් කිරීම්',rem:'Follow-up මතක් කිරීම් (පසුවූ සහ ඉදිරි දින 7)',none:'තවම කිසිවක් නැත.',call:'අමතන්න',done:'අවසන්',pd:'අය කරගත යුතු ගෙවීම් (පසුවූ සහ ඉදිරි දින 7)',sd:'ගෙවිය යුතු සර්වර් ගාස්තු (පසුවූ සහ ඉදිරි දින 7)',paid:'ගෙවා ඇත',
 mv:'මෙම මාසයේ visit කළ සාප්පු',six:'පසුගිය මාස 6 visits',add:'සාප්පුවක් එක් කරන්න',name:'සාප්පුවේ නම',about:'සාප්පුව ගැන (ව්‍යාපාරය, හිමිකරු, අවශ්‍ය දේ)',ph:'දුරකථන අංක (කොමාවෙන් වෙන් කරන්න)',map:'Google location link එක හෝ ස්ථානයේ නම',addr:'ලිපිනය',
@@ -68,16 +68,46 @@ hist:'Visit ඉතිහාසය',open:'සිතියම',last:'අවසන�
 disc:'වට්ටම (රු.)',print:'මුද්‍රණය / PDF',newd:'අලුත් ලේඛනයක්',sub:'උප එකතුව',total:'මුළු මුදල',billto:'ලබන්නා',terms:'කොන්දේසි (කොටේෂන් වල පෙන්වයි)',pins:'පරිශීලකයින්',bk:'Backup',rs:'Restore',
 tip:'දත්ත ගබඩා වන්නේ මෙම උපකරණයේයි. නිතර Backup කරන්න, නැතහොත් පහත Supabase සම්බන්ධ කර සියලු staff ට එකම දත්ත පෙන්වන්න.',saved:'සුරකින ලදී',cf:'මකන්නද?',visits:'visits',sign:'බලයලත් අත්සන',cust:'ගනුදෙනුකරුගේ අත්සන',nodoc:'ලේඛන නැත',
 need:'මෙම සාප්පුවට අවශ්‍ය / ගත් උපකරණ',mkq:'මේවායින් කොටේෂන් එකක් හදන්න',tobill:'බිල්පතක් බවට හරවන්න',sched:'ගෙවීම් කාලසටහන (වාරික)',dueD:'නියමිත දිනය',amt:'මුදල',paidOn:'ගෙවූ දිනය',addi:'වාරිකයක් එක් කරන්න',split:'බෙදන්න',months:'මාසික වාරික වලට',bal:'ඉතිරිය',paidT:'මෙතෙක් ගෙවූ',
-sv1:'ගාස්තුව (hosting, domain ආදි)',every:'නැවත සිදුවීම',once:'එක් වරක්',month:'මාසිකව',year:'වාර්ෂිකව',addsv:'ගාස්තුව එක් කරන්න',markpaid:'ගෙවූ බව සලකුණු කරන්න',adm:'ඇඩ්මින්',staff:'ස්ටාෆ්',newu:'පරිශීලකයෙක් එක් කරන්න',role:'භූමිකාව',sync:'හවුල් දත්ත (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync තත්වය',on:'සම්බන්ධයි',off:'මෙම උපකරණය පමණි',img:'ඡායාරූපය'}};
-const K='nx_mgr',CK='nx_cfg';
-let S=load(),CFG=lcfg(),me=null,tab='dash',cur=null,doc=null,dirty=0,okSync=0;
-function def(){return{lang:'en',ts:0,users:[{id:'u1',name:'Admin',pin:'1234',role:'admin'}],shops:[],eq:[],docs:[],srv:[],terms:'A 50% advance payment is required before work starts. Balance is payable on handover.\nThis quotation is valid for 14 days.'}}
-function load(){try{const s=JSON.parse(localStorage.getItem(K));if(s&&s.users)return Object.assign(def(),s)}catch(e){}return def()}
-function lcfg(){try{return JSON.parse(localStorage.getItem(CK))||{}}catch(e){return{}}}
-function save(){S.ts=Date.now();try{localStorage.setItem(K,JSON.stringify(S))}catch(e){alert('Storage full / ගබඩාව පිරී ඇත. Backup & delete old photos.')}dirty=1;clearTimeout(save.t);save.t=setTimeout(push,1500)}
-const hd=()=>({apikey:CFG.key,Authorization:'Bearer '+CFG.key,'Content-Type':'application/json'});
-async function push(){if(!CFG.url||!CFG.key)return;try{const r=await fetch(CFG.url.replace(/\/$/,'')+'/rest/v1/nexus_state',{method:'POST',headers:{...hd(),Prefer:'resolution=merge-duplicates'},body:JSON.stringify({id:1,data:S})});okSync=r.ok;if(r.ok)dirty=0}catch(e){okSync=0}}
-async function pull(){if(!CFG.url||!CFG.key||dirty)return;try{const r=await fetch(CFG.url.replace(/\/$/,'')+'/rest/v1/nexus_state?id=eq.1&select=data',{headers:hd()});okSync=r.ok;if(!r.ok)return;const j=await r.json();if(j[0]&&j[0].data.ts>S.ts){S=Object.assign(def(),j[0].data);localStorage.setItem(K,JSON.stringify(S));if(!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){if(me)me=S.users.find(u=>u.id==me.id)||null;draw()}}else if(!j[0])push()}catch(e){okSync=0}}
+sv1:'ගාස්තුව (hosting, domain ආදි)',every:'නැවත සිදුවීම',once:'එක් වරක්',month:'මාසිකව',year:'වාර්ෂිකව',addsv:'ගාස්තුව එක් කරන්න',markpaid:'ගෙවූ බව සලකුණු කරන්න',adm:'ඇඩ්මින්',staff:'ස්ටාෆ්',newu:'පරිශීලකයෙක් එක් කරන්න',role:'භූමිකාව',sync:'හවුල් දත්ත (Supabase)',url:'Project URL',key:'Anon key',sstat:'Sync තත්වය',on:'සම්බන්ධයි',off:'මෙම උපකරණය පමණි',img:'ඡායාරූපය',email:'ඊමේල්',pw:'මුරපදය',chpw:'මගේ මුරපදය වෙනස් කරන්න',npw:'අලුත් මුරපදය (අකුරු 6+)',nauth:'මෙම ගිණුම staff ලෙස සකසා නැත. ඇඩ්මින්ගෙන් අසන්න.',stf:'Staff ගිණුම්',addst:'Staff එකතු කරන්න',sy:'Sync වුණා',se2:'Sync ගැටලුවක්, නැවත උත්සාහ කරයි',pwok:'මුරපදය වෙනස් කළා',cfm:'ගිණුම හැදුවා, නමුත් Supabase ඊමේල් තහවුරු කිරීම ඉල්ලයි. Supabase හි Confirm email අක්‍රිය කරන්න (Authentication > Providers > Email).',expd:'Session කල් ඉකුත්වුණා. නැවත ඇතුල් වන්න.',cfgT:'Supabase සම්බන්ධ කරන්න',conn:'සම්බන්ධ කරන්න',wait:'ඇතුල් වෙමින්…',demo:'▶ ඩෙමෝ'}};
+const K='nx_mgr',SK='nx_snap',TK='nx_since',XK='nx_after',AK='nx_sess',MK='nx_me';
+const jj=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+function def(){return{lang:localStorage.getItem('nx_lang')||'en',eq:[],shops:[],docs:[],srv:[],pp:{},terms:'A 50% advance payment is required before work starts. Balance is payable on handover.\nThis quotation is valid for 14 days.'}}
+let S=Object.assign(def(),jj(K,{})),SES=jj(AK,null),me=SES?jj(MK,null):null,SN=jj(SK,{}),since=localStorage.getItem(TK)||'1970-01-01T00:00:00Z',after=localStorage.getItem(XK)||'',tab='dash',cur=null,doc=null,stat='',lastSync=null,pushing=0,pulling=0,expiring=0;
+S.lang=localStorage.getItem('nx_lang')||S.lang||'en';
+const hs=x=>{let h=5381;for(let i=0;i<x.length;i++)h=(h*33^x.charCodeAt(i))|0;return h+':'+x.length};
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){alert('Storage full / ගබඩාව පිරී ඇත. Delete old photos.')}clearTimeout(save.t);save.t=setTimeout(sync,1500)}
+const snSave=()=>localStorage.setItem(SK,JSON.stringify(SN));
+async function rpc(a,b){try{const r=await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+(SES?SES.at:'')},body:JSON.stringify({a,...b})});let d={};try{d=await r.json()}catch(e){}
+ if(r.status==401&&SES&&a!='login'){expire();return{ok:false,status:401,d}}return{ok:r.ok,status:r.status,d}}catch(e){return{ok:false,status:0,d:{error:'Network error'}}}}
+function expire(){if(expiring)return;expiring=1;alert(t('expd'));logout();expiring=0}
+function wipe(){[K,SK,TK,XK].forEach(k=>localStorage.removeItem(k));S=def();SN={};since='1970-01-01T00:00:00Z';after=''}
+function logout(){wipe();SES=null;me=null;localStorage.removeItem(AK);localStorage.removeItem(MK);cur=null;doc=null;draw()}
+function recs(){const m=new Map(),a=isA(),add=(k,kind,d)=>m.set(k,{kind,data:d,hh:hs(JSON.stringify(d))});
+ S.shops.forEach(x=>add('shop:'+x.id,'shop',x));
+ S.eq.forEach(e=>{add('eq:'+e.id,'eq',{id:e.id,n:e.n,img:e.img||''});if(a)add('price:'+e.id,'price',{p:+e.p||0})});
+ if(a){S.docs.forEach(x=>add('doc:'+x.id,'doc',x));S.srv.forEach(x=>add('srv:'+x.id,'srv',x));add('terms:terms','terms',{v:S.terms})}
+ return m}
+async function push(){if(!me||pushing)return;pushing=1;try{const cur=recs(),up=[];
+ cur.forEach((r,k)=>{if(SN[k]!==r.hh)up.push({id:k,kind:r.kind,data:r.data,deleted:false})});
+ Object.keys(SN).forEach(k=>{if(!cur.has(k))up.push({id:k,kind:k.split(':')[0],data:{},deleted:true})});
+ let i=0,ok=1;while(i<up.length&&ok){const ch=[];let sz=0;while(i<up.length&&(!ch.length||sz+JSON.stringify(up[i]).length<3e6)){sz+=JSON.stringify(up[i]).length;ch.push(up[i]);i++}
+  const r=await rpc('push',{up:ch});if(r.ok){ch.forEach(u=>{if(u.deleted)delete SN[u.id];else SN[u.id]=cur.get(u.id).hh});snSave()}else ok=0}
+ if(up.length)stat=ok?'ok':'err'}catch(e){stat='err'}finally{pushing=0}}
+function apply(w,m){const kind=w.kind,id=w.id.slice(kind.length+1),c=m.get(w.id);if(c&&SN[w.id]!==c.hh)return 0;
+ const arr={shop:S.shops,eq:S.eq,doc:S.docs,srv:S.srv}[kind],d=w.data||{};
+ if(kind=='terms'){if(w.deleted)return 0;S.terms=d.v;SN[w.id]=hs(JSON.stringify({v:S.terms}));return 1}
+ if(kind=='price'){if(w.deleted){delete S.pp[id];delete SN[w.id];return 1}S.pp[id]=d.p;const e=S.eq.find(x=>x.id==id);if(e)e.p=d.p;SN[w.id]=hs(JSON.stringify({p:+d.p||0}));return 1}
+ if(!arr)return 0;const i=arr.findIndex(x=>x.id==id);
+ if(w.deleted){if(i>=0)arr.splice(i,1);delete SN[w.id];return 1}
+ let o=d;if(kind=='eq'){o={id:d.id,n:d.n,img:d.img||''};const p=i>=0?arr[i].p:S.pp[id];if(p!==undefined)o.p=p;SN[w.id]=hs(JSON.stringify({id:o.id,n:o.n,img:o.img}))}else SN[w.id]=hs(JSON.stringify(o));
+ if(i>=0)arr[i]=o;else arr.push(o);return 1}
+async function pull(){if(!me||pulling)return;pulling=1;try{let ch=0,more=1,n=0,good=1;const m=recs();
+ while(more&&n++<40){const r=await rpc('pull',{since,after});if(!r.ok){good=0;break}
+  const rows=r.d.rows||[];rows.filter(w=>w.kind!='price').concat(rows.filter(w=>w.kind=='price')).forEach(w=>{if(apply(w,m))ch=1});
+  if(rows.length){const l=rows[rows.length-1];since=l.updated_at;after=l.id}more=r.d.more&&rows.length}
+ localStorage.setItem(TK,since);localStorage.setItem(XK,after);stat=good?'ok':'err';if(good)lastSync=new Date();
+ if(ch){localStorage.setItem(K,JSON.stringify(S));snSave();if(!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||''))draw()}}catch(e){stat='err'}finally{pulling=0}}
+async function sync(){await push();await pull()}
 const t=k=>(T[S.lang]||T.en)[k]||T.en[k]||k;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ld=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -87,17 +117,19 @@ const mapUrl=m=>/^https:\/\//i.test(m)?m:'https://www.google.com/maps/search/?ap
 const tel=p=>String(p).replace(/[^\d+]/g,''),isA=()=>me&&me.role=='admin';
 const addM=(s,n)=>{const[y,m,d]=s.split('-').map(Number);return ld(new Date(y,m-1+n,d))};
 const plus=n=>ld(new Date(Date.now()+n*864e5));
-function lang(){S.lang=S.lang=='en'?'si':'en';save();draw()}
-function login(){const u=S.users.find(x=>x.id==$('lu').value);if(u&&$('pin').value===u.pin){me=u;tab='dash';draw()}else $('err').textContent=t('bad')}
+function lang(){S.lang=S.lang=='en'?'si':'en';localStorage.setItem('nx_lang',S.lang);draw()}
+async function login(){const em=$('em').value.trim().toLowerCase(),pw=$('pw').value,er=$('err');er.textContent=t('wait');
+ const r=await rpc('login',{email:em,password:pw});if(!r.ok){er.textContent=r.status==401?t('bad'):(r.d.error||'Network error');return}
+ wipe();SES={at:r.d.token};localStorage.setItem(AK,JSON.stringify(SES));me=r.d.user;localStorage.setItem(MK,JSON.stringify(me));tab='dash';draw();sync()}
 function draw(){
  if(!me){$('app').innerHTML=`<div class="login"><div class="lc"><img src="${LOGO}" alt="Nexus Logics"><h2>${t('app')}</h2>
- <label for="lu">${t('user')}</label><select id="lu">${S.users.map(u=>`<option value="${u.id}">${E(u.name)} (${t(u.role)})</option>`).join('')}</select>
- <label for="pin">${t('pin')}</label><input id="pin" type="password" inputmode="numeric" autocomplete="off" style="text-align:center;font-size:20px" onkeydown="if(event.key=='Enter')login()">
- <p id="err" class="bad" role="alert"></p><button class="o" style="width:100%" onclick="login()">${t('login')}</button><p><button class="g s" onclick="lang()">English / සිංහල</button></p></div></div>`;return}
- const a=isA(),tabs=[['dash',t('dash')],['shops',t('shops')]].concat(a?[['eq',t('eq')],['docs',t('docs')],['srv',t('srv')],['set',t('set')]]:[]);
- $('app').innerHTML=`<div class="shell"><aside class="side"><img src="${LOGO}" alt="Nexus Logics">${tabs.map(([k,v])=>`<button class="nv ${tab==k?'on':''}" onclick="tab='${k}';cur=null;doc=null;draw()">${v}</button>`).join('')}<span style="flex:1"></span>
- <button class="nv dk" onclick="lang()">EN / සිංහල</button><button class="nv dk" onclick="me=null;draw()">${t('out')}</button><small>${E(me.name)}</small></aside>
- <main class="main"><div class="top"><h2>${tabs.find(x=>x[0]==tab)[1]}</h2><span class="chip">${E(me.name)} · ${t(me.role)}</span><span class="mb"><button class="g s" onclick="lang()">EN/සිං</button><button class="g s" onclick="me=null;draw()">${t('out')}</button></span></div><div id="v"></div></main></div>`;
+ <label for="em">${t('email')}</label><input id="em" type="email" autocomplete="username"><label for="pw">${t('pw')}</label><input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key=='Enter')login()">
+ <p id="err" class="bad" role="alert"></p><button class="o" style="width:100%" onclick="login()">${t('login')}</button>
+ <p><button class="g s" onclick="lang()">English / සිංහල</button></p></div></div>`;return}
+ const a=isA(),tabs=[['dash',t('dash')],['shops',t('shops')]].concat(a?[['eq',t('eq')],['docs',t('docs')],['srv',t('srv')]]:[]).concat([['set',t('set')],['demo',t('demo')]]);
+ $('app').innerHTML=`<div class="shell"><aside class="side"><img src="${LOGO}" alt="Nexus Logics">${tabs.map(([k,v])=>`<button class="nv ${tab==k?'on':''}" onclick="${k=='demo'?"location.href='demo.html'":"tab='"+k+"';cur=null;doc=null;draw()"}">${v}</button>`).join('')}<span style="flex:1"></span>
+ <button class="nv dk" onclick="lang()">EN / සිංහල</button><button class="nv dk" onclick="logout()">${t('out')}</button><small>${E(me.name)}</small></aside>
+ <main class="main"><div class="top"><h2>${tabs.find(x=>x[0]==tab)[1]}</h2><span class="chip">${E(me.name)} · ${t(me.role)}</span><span class="mb"><button class="g s" onclick="lang()">EN/සිං</button><button class="g s" onclick="logout()">${t('out')}</button></span></div><div id="v"></div></main></div>`;
  ({dash,shops,eq,docs,srv,set})[tab]();
 }
 const dueP=d=>(d.pays||[]).filter(p=>!p.paid&&p.due&&p.due<=plus(7)).map(p=>({...p,d}));
@@ -178,16 +210,20 @@ function srv(){$('v').innerHTML=`<div class="card"><div class="row"><div><label>
  <div><label>${t('dueD')}</label><input id="sd1" type="date" value="${ld()}"></div><div><label>${t('every')}</label><select id="se"><option value="month">${t('month')}</option><option value="year">${t('year')}</option><option value="once">${t('once')}</option></select></div><button class="o" onclick="as()">${t('addsv')}</button></div></div>
  <div class="card">${S.srv.map(x=>`<div class="ln sp"><div><b>${E((S.shops.find(s=>s.id==x.shop)||{}).name||'')}</b> · ${E(x.name)}<div class="${x.due<ld()?'bad':'mut'}">${x.due} · ${rs(x.amt)} · ${t(x.every)}</div></div><div class="row"><button class="s o" onclick="payS('${x.id}')">${t('markpaid')}</button><button class="s x" onclick="S.srv=S.srv.filter(s=>s.id!='${x.id}');save();draw()">×</button></div></div>`).join('')||`<p class="mut">${t('none')}</p>`}</div>`}
 function as(){if(!$('sh1').value||!$('sn1').value.trim())return;S.srv.push({id:uid(),shop:$('sh1').value,name:$('sn1').value.trim(),amt:+$('sa').value||0,due:$('sd1').value,every:$('se').value});save();draw()}
-function set(){$('v').innerHTML=`<div class="card"><h3>${t('pins')}</h3>${S.users.map(u=>`<div class="ln row" style="align-items:center"><input value="${E(u.name)}" onchange="uu('${u.id}','name',this.value)"><input value="${E(u.pin)}" style="max-width:110px" onchange="uu('${u.id}','pin',this.value)"><select style="max-width:120px" onchange="uu('${u.id}','role',this.value)"><option value="staff" ${u.role=='staff'?'selected':''}>${t('staff')}</option><option value="admin" ${u.role=='admin'?'selected':''}>${t('adm')}</option></select><button class="s x" onclick="du('${u.id}')">×</button></div>`).join('')}
- <div class="row" style="margin-top:8px"><input id="un" placeholder="${t('user')}"><input id="up" placeholder="${t('pin')}" style="max-width:110px"><button class="o" onclick="au()">${t('newu')}</button></div></div>
- <div class="card"><label>${t('terms')}</label><textarea id="tm" rows="4">${E(S.terms)}</textarea><p><button onclick="S.terms=$('tm').value;save();alert(t('saved'))">${t('save')}</button></p></div>
- <div class="card"><h3>${t('sync')}</h3><p class="mut">${t('tip')}</p><label>${t('url')}</label><input id="cu" value="${E(CFG.url||'')}" placeholder="https://xxxx.supabase.co"><label>${t('key')}</label><input id="ck" value="${E(CFG.key||'')}">
- <p>${t('sstat')}: <b>${CFG.url&&okSync?t('on'):t('off')}</b></p><div class="row"><button onclick="CFG={url:$('cu').value.trim(),key:$('ck').value.trim()};localStorage.setItem(CK,JSON.stringify(CFG));push().then(()=>draw())">${t('save')}</button><button onclick="bk()">${t('bk')}</button><button class="g" onclick="$('rf').click()">${t('rs')}</button><input id="rf" type="file" accept=".json" hidden onchange="rst(event)"></div></div>`}
-function uu(id,k,v){const u=S.users.find(x=>x.id==id);if(k!='name'&&!v)return;if(k=='role'&&v!='admin'&&S.users.filter(x=>x.role=='admin'&&x.id!=id).length==0){alert('Keep one admin');return draw()}u[k]=v;save();if(me&&me.id==id)me=u}
-function du(id){const u=S.users.find(x=>x.id==id);if(u.role=='admin'&&S.users.filter(x=>x.role=='admin').length<2||id==me.id)return alert('Keep one admin / own user');if(confirm(t('cf'))){S.users=S.users.filter(x=>x.id!=id);save();draw()}}
-function au(){const n=$('un').value.trim(),p=$('up').value.trim();if(!n||!p)return;S.users.push({id:uid(),name:n,pin:p,role:'staff'});save();draw()}
+function set(){const a=isA();$('v').innerHTML=`<div class="card"><h3>${t('chpw')}</h3><label for="np">${t('npw')}</label><input id="np" type="password" autocomplete="new-password"><p><button onclick="cpw()">${t('save')}</button></p></div>
+ ${a?`<div class="card"><h3>${t('stf')}</h3><div id="sl"></div><div class="row" style="margin-top:8px"><div><label for="an">${t('name')}</label><input id="an"></div><div><label for="ae">${t('email')}</label><input id="ae" type="email"></div><div><label for="ap">${t('pw')}</label><input id="ap" type="text" autocomplete="off"></div>
+ <div><label for="ar">${t('role')}</label><select id="ar"><option value="staff">${t('staff')}</option><option value="admin">${t('adm')}</option></select></div><button class="o" onclick="addStaff()">${t('addst')}</button></div></div>
+ <div class="card"><label>${t('terms')}</label><textarea id="tm" rows="4">${E(S.terms)}</textarea><p><button onclick="S.terms=$('tm').value;save();alert(t('saved'))">${t('save')}</button></p></div>`:''}
+ <div class="card"><p class="mut">${t('sstat')||'Sync'}: <b>${stat=='ok'&&lastSync?t('sy')+' '+lastSync.toLocaleTimeString():stat=='err'?t('se2'):'…'}</b></p>${a?`<div class="row"><button onclick="bk()">${t('bk')}</button><button class="g" onclick="$('rf').click()">${t('rs')}</button><input id="rf" type="file" accept=".json" hidden onchange="rst(event)"></div>`:''}</div>`;if(a)loadStaff()}
+async function cpw(){const p=$('np').value;if(p.length<6)return alert(t('npw'));const r=await rpc('password',{password:p});if(r.ok){$('np').value='';alert(t('pwok'))}else alert(r.d.error||'Error')}
+async function loadStaff(){const r=await rpc('staffList'),rows=r.ok?r.d.rows:[];if(!$('sl'))return;
+ $('sl').innerHTML=rows.map(u=>`<div class="ln row" style="align-items:center"><div><b>${E(u.name)}</b><div class="mut">${E(u.email)}</div></div><select style="max-width:120px" onchange="setRole('${E(u.email)}',this.value)"><option value="staff" ${u.role=='staff'?'selected':''}>${t('staff')}</option><option value="admin" ${u.role=='admin'?'selected':''}>${t('adm')}</option></select>${u.email==me.email?'':`<button class="s x" onclick="delStaff('${E(u.email)}')">×</button>`}</div>`).join('')}
+async function setRole(em,ro){const r=await rpc('staffRole',{email:em,role:ro});if(!r.ok)alert(r.d.error||'Error');loadStaff()}
+async function delStaff(em){if(!confirm(t('cf')))return;const r=await rpc('staffDel',{email:em});if(!r.ok)alert(r.d.error||'Error');loadStaff()}
+async function addStaff(){const n=$('an').value.trim(),em=$('ae').value.trim().toLowerCase(),pw=$('ap').value,ro=$('ar').value;if(!em||pw.length<6)return alert(t('npw'));
+ const r=await rpc('staffAdd',{name:n,email:em,password:pw,role:ro});if(!r.ok)return alert(r.d.error||'Error');$('an').value=$('ae').value=$('ap').value='';loadStaff()}
 function bk(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='nexus-backup-'+ld()+'.json';a.click()}
-function rst(e){const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(!d.shops)throw 0;S=Object.assign(def(),d);save();me=null;draw()}catch(_){alert('Invalid file')}})}
-draw();pull();setInterval(pull,45000);
+function rst(e){const f=e.target.files[0];if(!f)return;f.text().then(x=>{try{const d=JSON.parse(x);if(!d.shops)throw 0;S=Object.assign(def(),d,{lang:S.lang});save();draw();sync()}catch(_){alert('Invalid file')}})}
+draw();if(me)sync();setInterval(sync,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
 if("serviceWorker" in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script></body></html>

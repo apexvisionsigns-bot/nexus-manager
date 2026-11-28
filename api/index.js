@@ -1,15 +1,8 @@
 const crypto = require('crypto');
 const { createClient } = require('@supabase/supabase-js');
 
-// Keep only the origin of the URL, so extra parts like /rest/v1 or a trailing slash don't break requests
-const SB_URL = (() => {
-  try {
-    return new URL((process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim()).origin;
-  } catch (e) {
-    return '';
-  }
-})();
-const SB_KEY = (process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim();
+const SB_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SB_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SECRET = process.env.AUTH_SECRET || '';
 const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -107,8 +100,13 @@ async function pull(u, b) {
     p_kinds: u.role === 'admin' ? null : STAFF_KINDS,
     p_limit: PAGE + 1,
   })) || [];
-  const more = data.length > PAGE;
-  return { rows: more ? data.slice(0, PAGE) : data, more };
+  let more = data.length > PAGE;
+  let rows = more ? data.slice(0, PAGE) : data;
+  // keep each response under ~3 MB (Vercel limit is 4.5 MB; shop photos are large)
+  let size = 0, n = 0;
+  for (const r of rows) { size += JSON.stringify(r).length; if (n && size > 3000000) break; n++; }
+  if (n < rows.length) { rows = rows.slice(0, n); more = true; }
+  return { rows, more };
 }
 
 async function staffList() {
@@ -154,7 +152,6 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
     if (req.method !== 'POST') throw new HttpError(405, 'POST only');
-    if (/(^|\.)supabase\.com$/.test(new URL(SB_URL || 'http://x').hostname)) throw new HttpError(500, 'SUPABASE_URL is wrong: it must look like https://<project-id>.supabase.co (not the dashboard link)');
     if (!SB_URL || !SB_KEY) throw new HttpError(500, 'Supabase is not configured (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing)');
     if (SECRET.length < 16) throw new HttpError(500, 'AUTH_SECRET is missing or too short');
 
